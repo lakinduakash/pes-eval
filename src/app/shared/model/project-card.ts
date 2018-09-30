@@ -1,3 +1,4 @@
+// this is main items of project card
 export class ProjectCard {
   $key: string;
   id: number;

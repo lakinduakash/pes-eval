@@ -1,5 +1,5 @@
-export class Presentation
-{
-  name:string;
-  description?:string
+export class Presentation {
+  name: string;
+  description: string
 }
+
