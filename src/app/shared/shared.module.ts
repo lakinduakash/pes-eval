@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
+import {NgModule, NgZone, PLATFORM_ID} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PesFirestoreProviderService} from './services/pes-firestore-provider.service';
+import {PesFireStoreFactory, PesFireStoreProviderService} from './services/pes-firestore-provider.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [],
-  providers: [PesFirestoreProviderService]
+  providers: [{provide: PesFireStoreProviderService, deps: [PLATFORM_ID, NgZone], useFactory: PesFireStoreFactory}]
 })
 export class SharedModule {
 }
