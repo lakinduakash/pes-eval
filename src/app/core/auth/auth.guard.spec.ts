@@ -34,7 +34,7 @@ fdescribe('AuthGuard', () => {
         provide: AuthService,
         useClass: MockAuthService
 
-      }, MockAuthService]
+      }]
     });
 
     let i = TestBed.get(AuthService);
