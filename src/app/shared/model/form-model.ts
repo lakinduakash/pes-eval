@@ -3,7 +3,7 @@ export class FormModel {
   id: string;
   name: string;
   description: string;
-  sections: Section[] // the user sellect item array
+  sections: Section[]; // the user select item array
 
 
 }
