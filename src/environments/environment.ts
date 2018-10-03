@@ -14,6 +14,15 @@ export const fireBaseConfig = {
   storageBucket: 'pes-eval.appspot.com',
   messagingSenderId: '721843620769'
 };
+
+export const firBaseConfigPes = {
+  apiKey: 'AIzaSyCmovsqRyc1JWkCh7K8e_SGm7KdFpTIdJY',
+  authDomain: 'my-first-firebase-1319e.firebaseapp.com',
+  databaseURL: 'https://my-first-firebase-1319e.firebaseio.com',
+  projectId: 'my-first-firebase-1319e',
+  storageBucket: '',
+  messagingSenderId: '310316367899'
+};
 /*
  * In development mode, for easier debugging, you can ignore zone related error
  * stack frames such as `zone.run`/`zoneDelegate.invokeTask` by importing the
