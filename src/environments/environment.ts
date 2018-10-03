@@ -6,6 +6,14 @@ export const environment = {
   production: false
 };
 
+export const fireBaseConfig = {
+  apiKey: 'AIzaSyA3IEmXc922u6k1E9Qp3URx56pa55BuFZs',
+  authDomain: 'pes-eval.firebaseapp.com',
+  databaseURL: 'https://pes-eval.firebaseio.com',
+  projectId: 'pes-eval',
+  storageBucket: 'pes-eval.appspot.com',
+  messagingSenderId: '721843620769'
+};
 /*
  * In development mode, for easier debugging, you can ignore zone related error
  * stack frames such as `zone.run`/`zoneDelegate.invokeTask` by importing the
