@@ -6,6 +6,7 @@ import {AuthModule} from './core/auth/auth.module';
 import {AngularFireModule} from '@angular/fire';
 import {fireBaseConfig} from '../environments/environment';
 import {SharedModule} from './shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {SharedModule} from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AuthModule,
     AngularFireModule.initializeApp(fireBaseConfig),
     SharedModule
