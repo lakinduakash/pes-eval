@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../auth/auth.service';
-import {User} from '../core/model/user';
+
+import {User} from '../../shared/model/user';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {AuthService} from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
