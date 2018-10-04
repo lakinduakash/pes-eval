@@ -7,6 +7,11 @@ import {AngularFireModule} from '@angular/fire';
 import {fireBaseConfig} from '../environments/environment';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRouteModule} from './route.module';
+import {EvalSignInUpModule} from './eval-signin-up/eval-signin-up.module';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -16,9 +21,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRouteModule,
     AuthModule,
     AngularFireModule.initializeApp(fireBaseConfig),
-    SharedModule
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    SharedModule,
+    FlexLayoutModule,
+    EvalSignInUpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
