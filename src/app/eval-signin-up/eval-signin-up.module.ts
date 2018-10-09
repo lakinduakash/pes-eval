@@ -6,6 +6,7 @@ import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatP
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {RouterModule} from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   declarations: [LoginComponent, SignupComponent]
 })
