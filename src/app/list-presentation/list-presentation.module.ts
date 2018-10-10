@@ -2,6 +2,9 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ListMainComponent} from './list-main/list-main.component';
 import {RouterModule, Routes} from '@angular/router';
+import {ComponentsModule} from '../components/components.module';
+import {MatListModule} from '@angular/material';
+import {PresentListService} from './services/present-list.service';
 
 
 const routes:Routes=[
@@ -11,8 +14,11 @@ const routes:Routes=[
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ComponentsModule,
+    MatListModule
   ],
-  declarations: [ListMainComponent]
+  declarations: [ListMainComponent],
+  providers:[PresentListService]
 })
 export class ListPresentationModule { }
