@@ -3,12 +3,15 @@ import {CommonModule} from '@angular/common';
 import {ListMainComponent} from './list-main/list-main.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ComponentsModule} from '../components/components.module';
-import {MatListModule} from '@angular/material';
+import {MatButtonModule, MatListModule} from '@angular/material';
 import {PresentListService} from './services/present-list.service';
+import {FormViewComponent} from './form-view/form-view.component';
+import {EvalFormParserModule} from '../eval-form-parser/eval-form-parser.module';
 
 
 const routes:Routes=[
-  {path:'',component:ListMainComponent}
+  {path:'',component:ListMainComponent},
+  {path:'form',component:FormViewComponent}
 ];
 
 @NgModule({
@@ -16,9 +19,11 @@ const routes:Routes=[
     CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule,
+    EvalFormParserModule
   ],
-  declarations: [ListMainComponent],
+  declarations: [ListMainComponent, FormViewComponent],
   providers:[PresentListService]
 })
 export class ListPresentationModule { }
