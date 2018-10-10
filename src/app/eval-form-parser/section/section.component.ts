@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Section} from '../../core/model/form-model';
+import {Section} from '../../shared/model/form-model';
 
 @Component({
   selector: 'app-section-parser',
