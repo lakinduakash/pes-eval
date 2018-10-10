@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SectionAttribute} from '../../core/model/form-model';
+import {SectionAttribute} from '../../shared/model/form-model';
 
 @Component({
   selector: 'app-attribute-parser',
