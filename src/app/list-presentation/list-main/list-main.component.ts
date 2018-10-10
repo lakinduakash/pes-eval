@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {PresentListService} from '../services/present-list.service';
+import {from} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-main',
@@ -7,9 +10,34 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ListMainComponent implements OnInit {
 
-  constructor() { }
+  presentList:EvalPresentationData[]=[];
+
+  constructor(private pls:PresentListService,private router:Router) { }
 
   ngOnInit() {
+    this.pls.getPresentationList().subscribe(
+      next=>
+      {
+        from(next.payload.ref.get()).subscribe(next=>
+        {
+          let l=next.data().presentations as EvalPresentationData[];
+          l.forEach(item=>this.presentList.push(item))
+        })
+      }
+    )
   }
+
+  open(data:EvalPresentationData)
+  {
+    this.router.navigate(['presentations/form',{uid:data.uid,p:data.projectId,pr:data.presentId,form:data.formId}])
+  }
+
+}
+
+export interface EvalPresentationData {
+  formId: string
+  uid: string
+  projectId: string
+  presentId: string
 
 }
