@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, DocumentReference, DocumentSnapshot, QuerySnapshot} from '@angular/fire/firestore';
+import {DocumentReference, DocumentSnapshot, QuerySnapshot} from '@angular/fire/firestore';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {Observable, Subject} from 'rxjs';
 import {AuthService} from '../../core/auth/auth.service';
+import {PesFireStoreProviderService} from './pes-firestore-provider.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormService {
 
-  constructor(private fireStore: AngularFirestore, private authService: AuthService) {
+  constructor(private fireStore: PesFireStoreProviderService, private authService: AuthService) {
 
   }
 
@@ -41,15 +42,12 @@ export class FormService {
 
   }
 
-  getForm(id, projectId, presentId) {
+  getForm(uid,id, projectId, presentId) {
 
     let a = new Subject<any>();
 
-    this.authService.user.subscribe(next => {
-        if (next != null)
-          this.fireStore.collection(`usersC/${next.uid}/project/${projectId}/presentation/${presentId}/form`).doc(id).get().subscribe(next => a.next(next))
-      }
-    );
+    this.fireStore.collection(`usersC/${uid}/project/${projectId}/presentation/${presentId}/form`).doc(id).get().subscribe(next => a.next(next));
+
     return a as Observable<DocumentSnapshot<any>>
 
   }
