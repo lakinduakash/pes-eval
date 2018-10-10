@@ -1,0 +1,23 @@
+<div class="container">
+
+  <div class="flex-item">
+
+    <mat-card class="main-card">
+      <div class="form-card-header">
+  <mat-card-title>
+    {{title}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    {{description}}
+  </mat-card-subtitle>
+      </div>
+
+  <div *ngFor="let sec of sectionList">
+    <app-section-parser [section]="sec"> </app-section-parser>
+  </div>
+
+</mat-card>
+  </div>
+
+</div>
+

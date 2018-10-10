@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.flex-item {
+  display: flex;
+  justify-content: center;
+}
+
+.main-card {
+  margin-top: 40px;
+  max-width: 1200px;
+  width: 1200px;
+  background-color: rgba(255, 247, 251, 0.51);
+}
+
+.form-card-header {
+
+}
+

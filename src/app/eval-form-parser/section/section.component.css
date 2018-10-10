@@ -1,0 +1,10 @@
+mat-card{
+  margin-bottom:30px ;
+  border-radius: 10px;
+}
+
+mat-card-subtitle
+{
+  font-size: small;
+}
+
