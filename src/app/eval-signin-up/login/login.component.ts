@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
     this.authf.user.subscribe(next => {
       if (next != undefined && next.emailVerified)
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['']);
       else {
         //this.emailVerifiedStatus="Email not verified, first verify the email";
         this.authf.auth.signOut();
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
       this.authf.user.subscribe(next => {
         if (next != undefined && next.emailVerified)
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['']);
         else {
           this.emailVerifiedStatus = 'Email not verified, first verify the email';
           this.authf.auth.signOut();
