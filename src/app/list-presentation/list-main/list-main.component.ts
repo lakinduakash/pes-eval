@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PresentListService} from '../services/present-list.service';
-import {from} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Component({
@@ -18,11 +17,9 @@ export class ListMainComponent implements OnInit {
     this.pls.getPresentationList().subscribe(
       next=>
       {
-        from(next.payload.ref.get()).subscribe(next=>
-        {
-          let l=next.data().presentations as EvalPresentationData[];
-          l.forEach(item=>this.presentList.push(item))
-        })
+        console.log('jjj');
+        let l=next.data().presentations as EvalPresentationData[];
+        l.forEach(item=>this.presentList.push(item))
       }
     )
   }
