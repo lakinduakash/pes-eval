@@ -27,14 +27,17 @@ export class FormViewComponent implements OnInit {
   private routeId: string;
 
   ngOnInit() {
-    this.titleBar.setTitle("Form view");
-    this.route.paramMap.subscribe(next => this.routeId = next.get('id'));
-    console.log(this.routeId);
 
-    this.formService.getForm("","","","").subscribe(next => {
-      this.form = next.data() as FormModel;
-      this.printForm()
-    }, error1 => console.log(error1))
+    this.route.params.subscribe(
+      params=>{
+        console.log(params);
+        this.formService.getForm(params['uid'],params['form'],params['p'],params['pr']).subscribe(next => {
+          this.form = next.data() as FormModel;
+          this.printForm()
+        }, error1 => console.log(error1))
+      }
+    )
+
 
   }
 
