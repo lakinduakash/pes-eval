@@ -9,6 +9,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.panel-header, .panel-header-sm
+{
+  background: #7f1ab8 !important;
+}
 
 .cssload-loader-inner {
   bottom: 0;
