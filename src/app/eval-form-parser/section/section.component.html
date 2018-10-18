@@ -1,0 +1,20 @@
+<mat-card class="mat-elevation-z10">
+
+    <mat-card-title>
+      <p>{{title}}</p>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{description}}
+    </mat-card-subtitle>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <div *ngFor="let attr of attributeList">
+      <app-attribute-parser [sectionAtrr]="attr">
+
+      </app-attribute-parser>
+    </div>
+  </mat-card-content>
+
+</mat-card>

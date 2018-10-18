@@ -5,10 +5,11 @@ import {auth} from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 
-import {Observable, of, Subject} from 'rxjs';
+import {combineLatest, Observable, of, Subject} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
-import {fromPromise} from "rxjs/internal-compatibility";
-import {User} from "../../shared/model/user";
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {User} from '../../shared/model/user';
+import {PesFireStoreProviderService} from '../../shared/services/pes-firestore-provider.service';
 
 
 @Injectable()
@@ -16,12 +17,13 @@ export class AuthService {
 
   user:Observable<any>;
 
-  cacheUser
+  cacheUser;
 
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private coFireStore:PesFireStoreProviderService,
     private router: Router
   ) {
 
@@ -29,7 +31,7 @@ export class AuthService {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          this.cacheUser = user
+          this.cacheUser = user;
           return of(user)
         } else {
           return of(null)
@@ -72,9 +74,11 @@ export class AuthService {
   updateUserData(user,userData) {
     // Sets user data to firestore on login
 
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`usersC/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`usersE/${user.uid}`);
+    const fromPesUserRef:AngularFirestoreDocument<any>= this.coFireStore.doc(`usersE/${user.uid}`);
 
-    return fromPromise(userRef.set(userData, {merge: true})) as Observable<any>
+    return combineLatest(fromPromise(userRef.set(userData, {merge: true})),
+      fromPromise(fromPesUserRef.set(userData, {merge: true}))) as Observable<any>
 
   }
 

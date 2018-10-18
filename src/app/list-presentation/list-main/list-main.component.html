@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="blue">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-panel">
+    <app-navbar></app-navbar>
+    <div class="panel-header panel-header-sm">
+    </div>
+    <div class="main-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="pres-list">
+              <mat-nav-list>
+                <mat-list-item *ngFor="let i of presentList">
+                  Evaluation 1<br>
+                  {{i.presentId}}
+                  <button class="pres-open-button" mat-button (click)="open(i)">
+                    Open
+                  </button>
+                </mat-list-item>
+              </mat-nav-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+</div>
