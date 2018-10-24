@@ -7,6 +7,7 @@ import {FooterComponent} from './footer/footer.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarTitleService} from './services/nav-bar-title.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {NavBarTitleService} from './services/nav-bar-title.service';
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    PageNotFoundComponent
   ],
   exports: [
     FooterComponent,
