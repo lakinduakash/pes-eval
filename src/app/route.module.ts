@@ -18,6 +18,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   declarations: [],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
 export class AppRouteModule { }
