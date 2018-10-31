@@ -1,3 +1,8 @@
 .card{
   padding-bottom: 30px;
 }
+
+.main-panel .main-content{
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+}
