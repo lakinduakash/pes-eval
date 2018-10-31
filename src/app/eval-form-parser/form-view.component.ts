@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NavBarTitleService} from '../components/services/nav-bar-title.service';
 import {FormService} from '../shared/services/form.service';
 import {FormModel, Section} from '../shared/model/form-model';
+import {FormEditEventService} from './form-edit-event.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class FormViewComponent implements OnInit {
   @Input('eval-form')evalForm;
 
   constructor(private formService: FormService, private route: ActivatedRoute, private router: Router,
-              private titleBar: NavBarTitleService) {
+              private titleBar: NavBarTitleService,private editEvent:FormEditEventService) {
   }
 
   form:FormModel;
@@ -36,8 +37,9 @@ export class FormViewComponent implements OnInit {
           this.printForm()
         }, error1 => console.log(error1))
       }
-    )
+    );
 
+    this.editEvent.event.subscribe(next=>console.log(this.form))
 
   }
 
@@ -47,6 +49,11 @@ export class FormViewComponent implements OnInit {
     this.sectionList=this.form.sections;
     this.title=this.form.name;
     this.description=this.form.description
+  }
+
+  saveForm()
+  {
+
   }
 
 
