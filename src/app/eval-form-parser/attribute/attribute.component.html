@@ -4,8 +4,8 @@
 </span>
 <span class="marks">
   <mat-form-field>
-    <mat-select placeholder="Select marks">
-      <mat-option *ngFor=" let i of numbers" [value]="i">{{i}}</mat-option>
+    <mat-select placeholder="Select marks" [(value)]="currentM" (selectionChange)="updateMark($event)">
+      <mat-option *ngFor=" let im of numbers" [value]="im">{{im}}</mat-option>
 
     </mat-select>
     <mat-hint> maximum {{maxMarks}}</mat-hint>
