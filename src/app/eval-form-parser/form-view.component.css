@@ -30,3 +30,49 @@
 
 }
 
+.footer-banner
+{
+  position: fixed;
+  color: white;
+  height: 50px;
+  min-width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #4CD964;
+  transition: 0.5s;
+}
+
+.no-footer-banner{
+  position: fixed;
+  color: white;
+  height: 0;
+  min-width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: #4CD964;
+  transition: 0.5s;
+}
+
+.top-banner
+{
+  position: fixed;
+  color: white;
+  height: 50px;
+  min-width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #4CD964;
+  transition: 0.5s;
+}
+
+.no-top-banner{
+  position: fixed;
+  color: white;
+  height: 0;
+  min-width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #4CD964;
+  transition: 0.5s;
+}
+
