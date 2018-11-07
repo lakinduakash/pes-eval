@@ -5,6 +5,7 @@ import {FormService} from '../shared/services/form.service';
 import {FormModel, Section} from '../shared/model/form-model';
 import {FormEditEventService} from './form-edit-event.service';
 import {RealTimeMarkingService} from '../shared/services/real-time-marking.service';
+import {STATES} from '../shared/model/prsentation-control';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FormViewComponent implements OnInit {
 
   hideBottom=false;
   hideTop=true;
+  buttonDisabled=true;
 
   @HostListener('window:scroll', ['$event'])
   doSomething(event) {
@@ -60,6 +62,9 @@ export class FormViewComponent implements OnInit {
   projectId;
   presentId;
 
+  currentGroup;
+  stateStatus;
+
   ngOnInit() {
 
     this.route.params.subscribe(
@@ -70,7 +75,8 @@ export class FormViewComponent implements OnInit {
         this.presentId=params['pr'];
         this.formService.getForm(params['uid'],params['form'],params['p'],params['pr']).subscribe(next => {
           this.form = next.data() as FormModel;
-          this.printForm()
+          this.printForm();
+          this.init(this.uid,this.formId,this.projectId,this.presentId)
         }, error1 => console.log(error1))
       }
     );
@@ -84,9 +90,47 @@ export class FormViewComponent implements OnInit {
       this.realTimeMarking.getCurrentStates(uid,pid,preid).subscribe(
         next=>
         {
-
+          let data=next.payload.data();
+            this.stateBehaviour(data.currentState,data.currentGroup)
         }
       )
+  }
+
+
+  stateBehaviour(state,group)
+  {
+    this.currentGroup= 'group ' +group;
+    switch (state) {
+
+      case STATES.finished: {
+        this.currentGroup='';
+        this.stateStatus='Not started';
+        this.buttonDisabled=true;
+        break
+      }
+
+      case STATES.running: {
+        this.stateStatus='Presentation running';
+        this.buttonDisabled=false;
+        break
+      }
+
+      case STATES.paused: {
+        this.stateStatus='Presentation paused,wait for start';
+        this.buttonDisabled=true;
+        break
+      }
+      case STATES.suspended: {
+        this.stateStatus='Presentation canceled';
+        this.buttonDisabled=true;
+        break
+      }
+      default: {
+        this.currentGroup='';
+        this.stateStatus='Not started';
+        this.buttonDisabled=true;
+      }
+    }
   }
 
 

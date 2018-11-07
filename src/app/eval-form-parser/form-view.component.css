@@ -38,6 +38,7 @@
   min-width: 100%;
   left: 0;
   bottom: 0;
+  text-align: center;
   background-color: #4CD964;
   transition: 0.5s;
 }
@@ -49,6 +50,7 @@
   min-width: 100%;
   left: 0;
   bottom: 0;
+  text-align: center;
   background-color: #4CD964;
   transition: 0.5s;
 }
@@ -61,6 +63,7 @@
   min-width: 100%;
   left: 0;
   top: 0;
+  text-align: center;
   background-color: #4CD964;
   transition: 0.5s;
 }
@@ -72,6 +75,8 @@
   min-width: 100%;
   left: 0;
   top: 0;
+  display: none;
+  text-align: center;
   background-color: #4CD964;
   transition: 0.5s;
 }

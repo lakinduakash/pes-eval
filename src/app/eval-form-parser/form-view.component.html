@@ -15,7 +15,7 @@
   <div *ngFor="let sec of sectionList">
     <app-section-parser [section]="sec"> </app-section-parser>
   </div>
-      <button class="submit-button" mat-button (click)="saveForm()"> Submit </button>
+      <button class="submit-button" mat-button (click)="saveForm()" [disabled]="buttonDisabled"> Submit </button>
 
 </mat-card>
 
@@ -25,10 +25,11 @@
 </div>
 
 <div [className]="hideBottom?'no-footer-banner':'footer-banner'">
+  <p> {{stateStatus}}  <strong>{{currentGroup}}</strong></p>
 
 </div>
 
 <div [className]="hideTop?'no-top-banner':'top-banner'">
-
+  <p> {{stateStatus}}  <strong>{{currentGroup}}</strong></p>
 </div>
 
