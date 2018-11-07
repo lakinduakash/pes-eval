@@ -149,7 +149,8 @@ export class FormViewComponent implements OnInit {
       case STATES.suspended: {
         this.stateStatus='Presentation canceled';
         this.buttonDisabled=true;
-        this.timeSub.unsubscribe();
+        if(this.timeSub!=undefined)
+          this.timeSub.unsubscribe();
         this.time='';
         break
       }
@@ -157,7 +158,8 @@ export class FormViewComponent implements OnInit {
         this.currentGroup='';
         this.stateStatus='Not started';
         this.buttonDisabled=true;
-        this.timeSub.unsubscribe();
+        if(this.timeSub!=undefined)
+          this.timeSub.unsubscribe();
         this.time=''
       }
     }
