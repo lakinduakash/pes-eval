@@ -16,3 +16,17 @@ mat-list-item
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.p-name,.p-det{
+  display: block;
+}
+
+.p-det
+{
+  margin-left: auto;
+  color: #9A9A9A;
+}
+
+mat-list-item{
+  height: 300px;
+}

@@ -13,9 +13,9 @@
             <div class="pres-list">
               <mat-nav-list>
                 <mat-list-item *ngFor="let i of presentList">
-                  Evaluation 1<br>
-                  {{i.presentId}}
-                  <button class="pres-open-button" mat-button (click)="open(i)">
+                      <p mat-line class="p-name">{{i.presentDetails.name}}</p>
+                      <p mat-line class ='p-det'>{{i.presentDetails.description}}</p>
+                  <button class="pres-open-button" mat-button (click)="open(i.rawDetails)">
                     Open
                   </button>
                 </mat-list-item>
