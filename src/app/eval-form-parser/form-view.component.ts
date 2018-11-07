@@ -6,6 +6,7 @@ import {FormModel, Section} from '../shared/model/form-model';
 import {FormEditEventService} from './form-edit-event.service';
 import {RealTimeMarkingService} from '../shared/services/real-time-marking.service';
 import {STATES} from '../shared/model/prsentation-control';
+import {interval, Subscription} from 'rxjs';
 
 
 @Component({
@@ -65,6 +66,10 @@ export class FormViewComponent implements OnInit {
   currentGroup;
   stateStatus;
 
+  timeSub:Subscription;
+
+  time;
+
   ngOnInit() {
 
     this.route.params.subscribe(
@@ -91,9 +96,30 @@ export class FormViewComponent implements OnInit {
         next=>
         {
           let data=next.payload.data();
-            this.stateBehaviour(data.currentState,data.currentGroup)
+            this.stateBehaviour(data.currentState,data.currentGroup);
+            this.setTimer(data.startTime,data.currentState)
         }
       )
+  }
+
+  setTimer(startTime,state)
+  {
+    if (state != 2 && state != 3 &&((this.timeSub == undefined || this.timeSub.closed)))
+    {
+        this.timeSub=interval(1000).subscribe(val=>
+          {
+            let b = startTime;
+            let a = Date.now();
+            let totalSecs = Math.trunc(a / 1000 - b.seconds);
+
+            let minutes = Math.floor(totalSecs / 60);
+            let seconds = totalSecs % 60;
+
+            this.time = ' ' + minutes + " minutes " + seconds + ' seconds '
+          }
+
+        )
+    }
   }
 
 
@@ -123,12 +149,16 @@ export class FormViewComponent implements OnInit {
       case STATES.suspended: {
         this.stateStatus='Presentation canceled';
         this.buttonDisabled=true;
+        this.timeSub.unsubscribe();
+        this.time='';
         break
       }
       default: {
         this.currentGroup='';
         this.stateStatus='Not started';
         this.buttonDisabled=true;
+        this.timeSub.unsubscribe();
+        this.time=''
       }
     }
   }
