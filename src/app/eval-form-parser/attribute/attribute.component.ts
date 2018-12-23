@@ -28,7 +28,7 @@ export class AttributeComponent implements OnInit {
     for (let i=0;i<=this.maxMarks;i++)
       this.numbers.push(i)
 
-    console.log(this.numbers)
+    //console.log(this.numbers)
   }
 
   updateMark($event)
