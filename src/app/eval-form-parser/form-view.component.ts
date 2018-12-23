@@ -176,7 +176,11 @@ export class FormViewComponent implements OnInit {
 
   saveForm()
   {
-
+    if(this.currentGroup !== '' || this.currentGroup !=undefined)
+      this.realTimeMarking.saveFormFinal(this.uid,this.projectId,this.presentId,this.formId,this.currentGroup,this.form,);
+    else{
+      console.log('no group selected')
+    }
   }
 
 
