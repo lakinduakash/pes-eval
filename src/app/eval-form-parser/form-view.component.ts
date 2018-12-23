@@ -70,6 +70,8 @@ export class FormViewComponent implements OnInit {
 
   time;
 
+  currentState;
+
   ngOnInit() {
 
     this.route.params.subscribe(
@@ -80,13 +82,12 @@ export class FormViewComponent implements OnInit {
         this.presentId=params['pr'];
         this.formService.getForm(params['uid'],params['form'],params['p'],params['pr']).subscribe(next => {
           this.form = next.data() as FormModel;
-          this.printForm();
           this.init(this.uid,this.formId,this.projectId,this.presentId)
         }, error1 => console.log(error1))
       }
     );
 
-    this.editEvent.event.subscribe(next=>console.log(this.form))
+    this.editEvent.event.subscribe(next=>this.realTimeMarking.saveFormTemp(this.formId,this.form))
 
   }
 
@@ -96,10 +97,24 @@ export class FormViewComponent implements OnInit {
         next=>
         {
           let data=next.payload.data();
+          this.currentState=data.currentState;
             this.stateBehaviour(data.currentState,data.currentGroup);
-            this.setTimer(data.startTime,data.currentState)
+            this.setTimer(data.startTime,data.currentState);
+
+          this.realTimeMarking.getTempForm(this.formId).subscribe(next=>{
+            const data=next.data();
+            if(data!=undefined) {
+              if(this.currentState != STATES.suspended || this.currentState !=STATES.finished)
+                this.form = data;
+            }
+            else{
+              console.log('no cache form')
+            }
+            this.printForm();
+          })
         }
       )
+
   }
 
   setTimer(startTime,state)
@@ -176,8 +191,11 @@ export class FormViewComponent implements OnInit {
 
   saveForm()
   {
-    if(this.currentGroup !== '' || this.currentGroup !=undefined)
-      this.realTimeMarking.saveFormFinal(this.uid,this.projectId,this.presentId,this.formId,this.currentGroup,this.form,);
+    if(this.currentGroup !== '' || this.currentGroup !=undefined) {
+      this.realTimeMarking.saveFormFinal(this.uid, this.projectId, this.presentId, this.formId, this.currentGroup, this.form);
+      this.realTimeMarking.deleteTempForm(this.formId)
+    }
+
     else{
       console.log('no group selected')
     }
