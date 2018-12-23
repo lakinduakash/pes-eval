@@ -42,30 +42,34 @@ export class RealTimeMarkingService {
 
   }
 
-  saveFormTemp(formId,form)
+  saveFormTemp(formId,form):Observable<any>
   {
+    let o=new Observable();
     this.auth.user.subscribe(
       user=>
       {
         if(user!=null)
         {
-          return of(this.userFireStore.collection(`temp`).doc(formId).set(form))
+          o= of(this.userFireStore.collection(`temp`).doc(formId).set(form))
         }
       }
-    )
+    );
+    return o;
   }
 
   getTempForm(formId)
   {
+    let s:Subject<any>=new Subject();
     this.auth.user.subscribe(
       user=>
       {
         if(user!=null)
         {
-          return of(this.userFireStore.collection(`temp`).doc(formId).get())
+          this.userFireStore.collection(`temp`).doc(formId).get().subscribe(next=>{s.next(next)})
         }
       }
-    )
+    );
+    return s as Observable<any>;
   }
 
   deleteTempForm(formId)
@@ -75,7 +79,7 @@ export class RealTimeMarkingService {
       {
         if(user!=null)
         {
-          return of(this.userFireStore.collection(`temp`).doc(formId).delete())
+          this.userFireStore.collection(`temp`).doc(formId).delete().then(next=>console.log('cache form deleted'))
         }
       }
     )
