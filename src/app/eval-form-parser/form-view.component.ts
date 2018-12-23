@@ -51,6 +51,7 @@ export class FormViewComponent implements OnInit {
   }
 
   form:FormModel;
+  mainForm:FormModel;
   sectionList:Section[];
 
   title;
@@ -63,7 +64,7 @@ export class FormViewComponent implements OnInit {
   projectId;
   presentId;
 
-  currentGroup;
+  currentGroup='';
   stateStatus;
 
   timeSub:Subscription;
@@ -82,6 +83,7 @@ export class FormViewComponent implements OnInit {
         this.presentId=params['pr'];
         this.formService.getForm(params['uid'],params['form'],params['p'],params['pr']).subscribe(next => {
           this.form = next.data() as FormModel;
+          this.mainForm = next.data() as FormModel;
           this.init(this.uid,this.formId,this.projectId,this.presentId)
         }, error1 => console.log(error1))
       }
@@ -98,14 +100,17 @@ export class FormViewComponent implements OnInit {
         {
           let data=next.payload.data();
           this.currentState=data.currentState;
-            this.stateBehaviour(data.currentState,data.currentGroup);
-            this.setTimer(data.startTime,data.currentState);
+          //let newForm=this.listenGroupChanges(data.currentGroup)
+          this.stateBehaviour(data.currentState,data.currentGroup);
+          this.setTimer(data.startTime,data.currentState);
 
+          //if(newForm)
+            //return
           this.realTimeMarking.getTempForm(this.formId).subscribe(next=>{
             const data=next.data();
             if(data!=undefined) {
-              if(this.currentState != STATES.suspended || this.currentState !=STATES.finished)
-                this.form = data;
+              if(!(this.currentState == STATES.suspended || this.currentState ==STATES.finished))
+                  this.form = data;
             }
             else{
               console.log('no cache form')
@@ -138,6 +143,23 @@ export class FormViewComponent implements OnInit {
   }
 
 
+  listenGroupChanges(newGroup)
+  {
+    if(newGroup !==this.currentGroup) {
+      if(this.currentGroup!='') {
+        this.form = this.mainForm;
+
+        this.printForm();
+        console.log(newGroup);
+        return true
+      }
+      return false
+    }
+    return false
+
+  }
+
+
   stateBehaviour(state,group)
   {
     this.currentGroup= 'group ' +group;
@@ -167,12 +189,14 @@ export class FormViewComponent implements OnInit {
         if(this.timeSub!=undefined)
           this.timeSub.unsubscribe();
         this.time='';
+        this.realTimeMarking.deleteTempForm(this.formId);
         break
       }
       default: {
         this.currentGroup='';
         this.stateStatus='Not started';
         this.buttonDisabled=true;
+        this.realTimeMarking.deleteTempForm(this.formId);
         if(this.timeSub!=undefined)
           this.timeSub.unsubscribe();
         this.time=''
