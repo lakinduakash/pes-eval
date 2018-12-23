@@ -10,3 +10,8 @@ export function getPath(uid, projectId?, presentId?, isForm?): string {
 
 }
 
+export const userCPath='usersC';
+export const projectPath='project';
+export const presentPath='presentation';
+export const formPath='form';
+
