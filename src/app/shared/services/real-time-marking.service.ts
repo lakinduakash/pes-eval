@@ -42,7 +42,44 @@ export class RealTimeMarkingService {
 
   }
 
-  
+  saveFormTemp(formId,form)
+  {
+    this.auth.user.subscribe(
+      user=>
+      {
+        if(user!=null)
+        {
+          return of(this.userFireStore.collection(`temp`).doc(formId).set(form))
+        }
+      }
+    )
+  }
+
+  getTempForm(formId)
+  {
+    this.auth.user.subscribe(
+      user=>
+      {
+        if(user!=null)
+        {
+          return of(this.userFireStore.collection(`temp`).doc(formId).get())
+        }
+      }
+    )
+  }
+
+  deleteTempForm(formId)
+  {
+    this.auth.user.subscribe(
+      user=>
+      {
+        if(user!=null)
+        {
+          return of(this.userFireStore.collection(`temp`).doc(formId).delete())
+        }
+      }
+    )
+  }
 
 }
 
