@@ -10,11 +10,37 @@
   <mat-divider></mat-divider>
 
   <mat-card-content>
-    <div *ngFor="let attr of attributeList">
-      <app-attribute-parser [sectionAtrr]="attr">
 
-      </app-attribute-parser>
-    </div>
+    <div style="height: 10px"></div>
+
+    <ng-template #ind>
+
+      <div *ngFor="let a of attrInd" style="margin-top: 8px">
+        <h6>student Id:{{a.studentId}}</h6>
+        <hr>
+
+        <div *ngFor="let attr of a.attr">
+          <app-attribute-parser [sectionAtrr]="attr">
+
+          </app-attribute-parser>
+        </div>
+      </div>
+
+    </ng-template>
+
+    <ng-template #gr>
+
+      <div *ngFor="let attr of attributeList">
+        <app-attribute-parser [sectionAtrr]="attr">
+
+        </app-attribute-parser>
+      </div>
+    </ng-template>
+
+    <ng-container *ngIf="!this.section.type||this.section.type==2;then gr else ind">
+
+    </ng-container>
+
   </mat-card-content>
 
 </mat-card>
