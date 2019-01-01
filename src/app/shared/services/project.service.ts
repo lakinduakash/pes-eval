@@ -17,4 +17,20 @@ export class ProjectService {
 
     return a as Observable<DocumentSnapshot<any>>
   }
+
+  public getStudentsOfGroup(uid,projectId,groupId:string)
+  {
+    let subject = new Subject<any>();
+    this.fireStore.collection(`usersC/${uid}/project`).doc(projectId).get().subscribe(doc =>
+    {
+      if(doc.data().students)
+      {
+        let a=doc.data().students as any[];
+        subject.next(a.find(x=>x.group==groupId))
+
+      }
+    });
+
+    return subject as Observable<any>
+  }
 }
