@@ -13,6 +13,16 @@
       </div>
 
   <div *ngFor="let sec of sectionList">
+
+    <div *ngIf="!sec.type || sec.type==2" class="section-wrap">
+      <h5 style="color: #920b43">Group mark based section</h5>
+      <hr>
+    </div>
+
+    <div *ngIf="sec.type==1" class="section-wrap">
+      <h5 style="color: #920b43">Individual member mark based section</h5>
+      <hr>
+    </div>
     <app-section-parser [section]="sec"> </app-section-parser>
   </div>
       <button class="submit-button" mat-button (click)="saveForm()" [disabled]="buttonDisabled"> Submit </button>
