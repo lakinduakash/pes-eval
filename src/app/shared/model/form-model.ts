@@ -16,7 +16,17 @@ export class Section {
   description: string;
   maxMarks: number;
   currentMark: number;
-  attr: SectionAttribute[]
+  type: SectionType;
+  attr: SectionAttribute[];
+  attrInd: {
+    attr:{
+      $key: string;
+      id: number;
+      criteria: string;
+      maxMark: number;
+      currentMark: number; }[]
+    studentId:string
+  }[]
 
 
 }
@@ -33,3 +43,14 @@ export class SectionAttribute {
   }
 
 }
+
+export class IndividualAttrSet
+{
+  attr:SectionAttribute;
+  studentId:string
+}
+
+
+
+
+export const enum SectionType {INDIVIDUAL = 1, GROUP = 2}
