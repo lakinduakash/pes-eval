@@ -7,6 +7,7 @@ import {FormEditEventService} from './form-edit-event.service';
 import {RealTimeMarkingService} from '../shared/services/real-time-marking.service';
 import {STATES} from '../shared/model/prsentation-control';
 import {interval, Subscription} from 'rxjs';
+import {ProjectService} from '../shared/services/project.service';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class FormViewComponent implements OnInit {
   }
 
   constructor(private formService: FormService,
+              private projectService:ProjectService,
               private route: ActivatedRoute, private router: Router,
               private titleBar: NavBarTitleService,
               private editEvent:FormEditEventService,
@@ -63,6 +65,8 @@ export class FormViewComponent implements OnInit {
   formId;
   projectId;
   presentId;
+
+  studentIds;
 
   currentGroup='';
   stateStatus;
@@ -101,6 +105,10 @@ export class FormViewComponent implements OnInit {
           let data=next.payload.data();
           this.currentState=data.currentState;
           //let newForm=this.listenGroupChanges(data.currentGroup)
+
+          if(data.currentGroup!='')
+            this.getGroup(data.currentGroup);
+
           this.stateBehaviour(data.currentState,data.currentGroup);
           this.setTimer(data.startTime,data.currentState);
 
@@ -223,6 +231,21 @@ export class FormViewComponent implements OnInit {
     else{
       console.log('no group selected')
     }
+  }
+
+  getGroup(groupId)
+  {
+    this.projectService.getStudentsOfGroup(this.uid,this.projectId,groupId).subscribe(next=>{
+
+      let arr=[];
+      Object.values(next).slice(1).forEach(val => arr.push(val));
+
+      this.studentIds=arr;
+      console.log(arr);
+      this.editEvent.event.emit(51)
+    })
+
+
   }
 
 

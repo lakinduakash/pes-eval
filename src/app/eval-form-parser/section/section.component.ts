@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Section, SectionAttribute, SectionType} from '../../shared/model/form-model';
+import {FormEditEventService} from '../form-edit-event.service';
 
 @Component({
   selector: 'app-section-parser',
@@ -26,13 +27,15 @@ export class SectionComponent implements OnInit {
     studentId:string
   }[]=[];
 
-  constructor() { }
+  constructor(public editEvent:FormEditEventService) { }
 
   ngOnInit() {
     if(!this.stuIds)
     {
-      this.stuIds=['1','2','3','4']
+      this.stuIds=['1','2','3','4'];
+      console.log(this.stuIds)
     }
+
     this.title=this.section.name;
     this.description=this.section.description;
     this.attributeList=this.section.attr;
@@ -41,6 +44,7 @@ export class SectionComponent implements OnInit {
 
     }
     else {
+
       this.selectIndividuals();
     }
   }
