@@ -225,7 +225,7 @@ export class FormViewComponent implements OnInit {
 
   saveForm()
   {
-    let dialogRef:MatDialogRef<ConfirmationDialog>= this.dialog.open(ConfirmationDialog,{width:'350px',height:'350px'});
+    let dialogRef:MatDialogRef<ConfirmationDialog>= this.dialog.open(ConfirmationDialog,{width:'350px'});
 
     dialogRef.afterClosed().subscribe(next=>
     {
@@ -269,12 +269,12 @@ export class FormViewComponent implements OnInit {
     <h1 mat-dialog-title>Submit form</h1>
     <div mat-dialog-content>
       You cannot change marks after submitted.Are you sure to submit?
+    </div>
 
       <div mat-dialog-actions>
         <button mat-button cdkFocusInitial (click)="onNoClick()">Cancel</button>
         <button mat-button (click)="onYesClick()">Submit</button>
       </div>
-    </div>
   `
 })
 
