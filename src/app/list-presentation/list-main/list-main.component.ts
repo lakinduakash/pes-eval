@@ -12,6 +12,10 @@ export class ListMainComponent implements OnInit {
 
   presentList:EvalPresentationData[]=[];
 
+  finishLoaded=false;
+  isEmptyP=false;
+  isError=false;
+
   constructor(private pls:PresentListService,private router:Router,public presentationService:PresentationService) { }
 
   ngOnInit() {
@@ -19,16 +23,26 @@ export class ListMainComponent implements OnInit {
       next=>
       {
         let l=next.data().presentations as EvalPresentationRawData[];
+
+        if(l)
         l.forEach(item=>{
           this.presentationService.getPresentation(item.uid,item.projectId,item.presentId).subscribe(
             data=>{
               console.log(data.data());
               this.presentList.push({rawDetails:item,presentDetails:data.data()})
+
             }
           )
 
-        })
-      }
+        });
+        else
+        {
+          this.isEmptyP=true
+        }
+
+        this.finishLoaded=true;
+      },
+      error1 => this.isError=true
     )
   }
 
