@@ -8,6 +8,7 @@ import {RealTimeMarkingService} from '../shared/services/real-time-marking.servi
 import {STATES} from '../shared/model/prsentation-control';
 import {interval, Subscription} from 'rxjs';
 import {ProjectService} from '../shared/services/project.service';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -49,7 +50,8 @@ export class FormViewComponent implements OnInit {
               private route: ActivatedRoute, private router: Router,
               private titleBar: NavBarTitleService,
               private editEvent:FormEditEventService,
-              public realTimeMarking:RealTimeMarkingService) {
+              public realTimeMarking:RealTimeMarkingService,
+              public dialog:MatDialog) {
   }
 
   form:FormModel;
@@ -223,14 +225,22 @@ export class FormViewComponent implements OnInit {
 
   saveForm()
   {
-    if(this.currentGroup !== '' || this.currentGroup !=undefined) {
-      this.realTimeMarking.saveFormFinal(this.uid, this.projectId, this.presentId, this.formId, this.currentGroup, this.form);
-      this.realTimeMarking.deleteTempForm(this.formId)
-    }
+    let dialogRef:MatDialogRef<ConfirmationDialog>= this.dialog.open(ConfirmationDialog,{width:'350px',height:'350px'});
 
-    else{
-      console.log('no group selected')
-    }
+    dialogRef.afterClosed().subscribe(next=>
+    {
+      if(dialogRef.componentInstance.yesClicked)
+      {
+        if(this.currentGroup !== '' || this.currentGroup !=undefined) {
+          this.realTimeMarking.saveFormFinal(this.uid, this.projectId, this.presentId, this.formId, this.currentGroup, this.form);
+          this.realTimeMarking.deleteTempForm(this.formId)
+        }
+
+        else{
+          console.log('no group selected')
+        }
+      }
+    })
   }
 
   getGroup(groupId)
@@ -249,5 +259,43 @@ export class FormViewComponent implements OnInit {
   }
 
 
+}
 
+
+// @ts-ignore
+@Component({
+  selector: 'app-c-dialog',
+  template: `
+    <h1 mat-dialog-title>Submit form</h1>
+    <div mat-dialog-content>
+      You cannot change marks after submitted.Are you sure to submit?
+
+      <div mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="onYesClick()">Submit</button>
+      </div>
+    </div>
+  `
+})
+
+export class ConfirmationDialog implements OnInit {
+
+  yesClicked = false;
+
+  constructor(public dialogRef: MatDialogRef<ConfirmationDialog>) {
+
+  }
+
+
+  ngOnInit(): void {
+  }
+
+  onYesClick() {
+    this.yesClicked = true;
+    this.dialogRef.close()
+  }
+
+  onNoClick() {
+    this.dialogRef.close()
+  }
 }

@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormViewComponent} from './form-view.component';
+import {ConfirmationDialog, FormViewComponent} from './form-view.component';
 
 import {
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
@@ -29,10 +30,12 @@ import {SharedModule} from '../shared/shared.module';
     FormsModule,
     MatOptionModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ],
-  declarations: [FormViewComponent,SectionComponent,AttributeComponent],
-  exports:[FormViewComponent]
+  declarations: [FormViewComponent,SectionComponent,AttributeComponent,ConfirmationDialog],
+  exports:[FormViewComponent],
+  entryComponents:[ConfirmationDialog]
 })
 export class EvalFormParserModule {
 }
