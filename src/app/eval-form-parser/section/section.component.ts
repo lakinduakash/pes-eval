@@ -51,10 +51,13 @@ export class SectionComponent implements OnInit {
 
   selectIndividuals(arr:any[])
   {
+
     this.attrInd=[];
       for(let id of arr)
       {
-        this.attrInd.push({studentId:id,attr:this.attributeList})
+
+        let cloneOfA = JSON.parse(JSON.stringify(this.attributeList));
+        this.attrInd.push({studentId:id,attr:cloneOfA})
       }
 
       this.section.attrInd=this.attrInd
