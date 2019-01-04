@@ -25,8 +25,14 @@ export class AttributeComponent implements OnInit {
     this.maxMarks=this.attr.maxMark;
     this.currentM=this.attr.currentMark;
 
-    for (let i=0;i<=this.maxMarks;i++)
-      this.numbers.push(i)
+    if (this.attr.isDecimal) {
+      for (let i = 0; i <= this.maxMarks; i = i + 0.5) {
+        this.numbers.push(i)
+      }
+    } else {
+      for (let i = 0; i <= this.maxMarks; i++)
+        this.numbers.push(i)
+    }
 
     //console.log(this.numbers)
   }
