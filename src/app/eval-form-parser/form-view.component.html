@@ -12,6 +12,12 @@
   </mat-card-subtitle>
 
         <div> <p>Current Group Mark: {{currentTotalMarks}}/{{form?.totalMarks}}</p></div>
+
+        <ul>
+          <li *ngFor="let s of indMarkMap | keyvalue">
+            {{s.key}} : {{s.value}}
+          </li>
+        </ul>
       </div>
 
 
