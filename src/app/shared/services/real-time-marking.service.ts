@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {PesFireStoreProviderService} from './pes-firestore-provider.service';
 import {AuthService} from '../../core/auth/auth.service';
 import {getPath} from '../model/firstore-path';
-import {Observable, of, Subject} from 'rxjs';
+import {from, Observable, of, Subject} from 'rxjs';
 import {Action, AngularFirestore, DocumentSnapshot} from '@angular/fire/firestore';
 
 @Injectable({
@@ -30,15 +30,23 @@ export class RealTimeMarkingService {
 
   saveFormFinal(uid,projectId,presentId,formId,group,finalMarks)
   {
+    let s=new Subject();
     this.auth.user.subscribe(
       user=>
       {
         if(user!=null)
         {
-          return of(this.pesFireStore.collection(getPath(uid,projectId)+`/${projectId}/mark/${group}/${presentId}`).doc(user.uid).set(finalMarks))
+          from(this.pesFireStore.collection(getPath(uid,projectId)+`/${projectId}/mark`).doc(group).set({group:group})).
+          subscribe(next=>
+            this.pesFireStore.collection(getPath(uid,projectId)+`/${projectId}/mark/${group}/${presentId}`).doc(user.uid).set(finalMarks).
+            then(ni=>s.next('saved'))
+          )
+
         }
       }
-    )
+    );
+
+    return s as Observable<any>
 
   }
 
