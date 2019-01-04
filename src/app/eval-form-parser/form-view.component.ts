@@ -70,7 +70,9 @@ export class FormViewComponent implements OnInit {
   projectId;
   presentId;
 
-  studentIds;
+  studentIds=[];
+
+  indMarkMap=new Map<string,number>();
 
   currentGroup='';
   stateStatus;
@@ -83,6 +85,7 @@ export class FormViewComponent implements OnInit {
 
 
   currentTotalMarks=0;
+
 
   ngOnInit() {
 
@@ -264,6 +267,8 @@ export class FormViewComponent implements OnInit {
 
       this.studentIds=arr;
       console.log(arr);
+
+      arr.forEach(id=>this.indMarkMap.set(id,0));
       this.editEvent.groupReceived.next(arr);
     })
 
@@ -287,9 +292,16 @@ export class FormViewComponent implements OnInit {
             }
           } else {
             if (s.attrInd != undefined) {
-              for (let k of s.attr) {
-                if (k.maxMark != undefined){}
-                  //this.currentTotalMarksForIndividual += k.maxMark
+              for(let memberASet of s.attrInd)
+              {
+                let memberMark=0;
+
+                for (let k of memberASet.attr) {
+                  if (k.currentMark != undefined)
+                    memberMark += k.currentMark
+                }
+
+                this.indMarkMap.set(memberASet.studentId,memberMark);
               }
             }
           }
