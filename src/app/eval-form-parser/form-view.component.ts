@@ -2,7 +2,7 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavBarTitleService} from '../components/services/nav-bar-title.service';
 import {FormService} from '../shared/services/form.service';
-import {FormModel, Section} from '../shared/model/form-model';
+import {FormModel, Section, SectionType} from '../shared/model/form-model';
 import {FormEditEventService} from './form-edit-event.service';
 import {RealTimeMarkingService} from '../shared/services/real-time-marking.service';
 import {STATES} from '../shared/model/prsentation-control';
@@ -81,6 +81,9 @@ export class FormViewComponent implements OnInit {
 
   currentState;
 
+
+  currentTotalMarks=0;
+
   ngOnInit() {
 
     this.route.params.subscribe(
@@ -128,6 +131,8 @@ export class FormViewComponent implements OnInit {
               console.log('no cache form')
             }
             this.printForm();
+
+            this.calculateTotalMark();
           });
 
           this.realTimeMarking.checkExistSavedForm(this.uid,this.projectId,this.presentId,this.currentGroup).subscribe(
@@ -266,6 +271,37 @@ export class FormViewComponent implements OnInit {
   }
 
 
+  calculateTotalMark()
+  {
+    this.editEvent.event.subscribe(next => {
+      this.currentTotalMarks = 0;
+      if (this.sectionList != undefined) {
+        for (let s of this.sectionList) {
+
+          if (!s.type || s.type == SectionType.GROUP) {
+            if (s.attr != undefined) {
+              for (let k of s.attr) {
+                if (k.currentMark != undefined)
+                  this.currentTotalMarks += k.currentMark
+              }
+            }
+          } else {
+            if (s.attr != undefined) {
+              for (let k of s.attr) {
+                if (k.maxMark != undefined){}
+                  //this.currentTotalMarksForIndividual += k.maxMark
+              }
+            }
+          }
+        }
+      }
+
+      this.form.currentMark=this.currentTotalMarks
+
+    })
+  }
+
+
 }
 
 
@@ -305,4 +341,6 @@ export class ConfirmationDialog implements OnInit {
   onNoClick() {
     this.dialogRef.close()
   }
+
+
 }
