@@ -25,7 +25,7 @@
     </div>
     <app-section-parser [section]="sec" [studentIds]="studentIds"> </app-section-parser>
   </div>
-      <button class="submit-button" mat-button (click)="saveForm()" [disabled]="buttonDisabled"> Submit </button>
+      <button class="submit-button" mat-button (click)="saveForm()" [disabled]="buttonDisabled || documentExist"> Submit </button>
 
 </mat-card>
 

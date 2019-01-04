@@ -24,6 +24,8 @@ export class FormViewComponent implements OnInit {
   hideTop=true;
   buttonDisabled=true;
 
+  documentExist=true;
+
   @HostListener('window:scroll', ['$event'])
   doSomething(event) {
     let windowHeight = "innerHeight" in window ? window.innerHeight
@@ -95,7 +97,10 @@ export class FormViewComponent implements OnInit {
       }
     );
 
-    this.editEvent.event.subscribe(next=>this.realTimeMarking.saveFormTemp(this.formId,this.form))
+    this.editEvent.event.subscribe(next=>this.realTimeMarking.saveFormTemp(this.formId,this.form));
+    this.realTimeMarking.checkExistSavedForm(this.uid,this.projectId,this.presentId,this.currentGroup).subscribe(
+      next=>this.documentExist=next
+    )
 
   }
 
