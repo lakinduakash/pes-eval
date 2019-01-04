@@ -52,10 +52,10 @@ export class RealTimeMarkingService {
 
   checkExistSavedForm(uid,projectId,presentId,group)
   {
-    let s =new BehaviorSubject<boolean>(true);
+    let s =new BehaviorSubject<boolean>(false);
     this.auth.user.subscribe(
       user=> {
-        if (user != null)
+        if (user != null && group !='')
           this.pesFireStore.collection(getPath(uid, projectId) + `/${projectId}/mark/${group}/${presentId}`).doc(user.uid).get().subscribe(
             next=>s.next(next.exists)
           )
