@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {PesFireStoreProviderService} from './pes-firestore-provider.service';
 import {AuthService} from '../../core/auth/auth.service';
 import {getPath} from '../model/firstore-path';
-import {from, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, from, Observable, of, Subject} from 'rxjs';
 import {Action, AngularFirestore, DocumentSnapshot} from '@angular/fire/firestore';
 
 @Injectable({
@@ -47,6 +47,20 @@ export class RealTimeMarkingService {
     );
 
     return s as Observable<any>
+
+  }
+
+  checkExistSavedForm(uid,projectId,presentId,group)
+  {
+    let s =new BehaviorSubject<boolean>(true);
+    this.auth.user.subscribe(
+      user=> {
+        if (user != null)
+          this.pesFireStore.collection(getPath(uid, projectId) + `/${projectId}/mark/${group}/${presentId}`).doc(user.uid).get().subscribe(
+            next=>s.next(next.exists)
+          )
+      });
+    return s as Observable<boolean>
 
   }
 
