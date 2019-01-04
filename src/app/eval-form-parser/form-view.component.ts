@@ -308,7 +308,8 @@ export class FormViewComponent implements OnInit {
         }
       }
 
-      this.form.currentMark=this.currentTotalMarks
+      this.form.currentMark=this.currentTotalMarks;
+      this.form.individualMarkMap=this.indMarkMap;
 
     })
   }
