@@ -309,10 +309,16 @@ export class FormViewComponent implements OnInit {
       }
 
       this.form.currentMark=this.currentTotalMarks;
-      this.form.individualMarkMap=this.indMarkMap;
+      this.form.individualMarkMap= this.xah_map_to_obj(this.indMarkMap);
 
     })
   }
+
+  xah_map_to_obj = ( aMap => {
+    const obj = {};
+    aMap.forEach ((v,k) => { obj[k] = v });
+    return obj;
+  });
 
 
 }
