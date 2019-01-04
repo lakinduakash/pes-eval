@@ -5,7 +5,9 @@ export class FormModel {
   description: string;
   sections: Section[]; // the user select item array
   totalMarks:number;
-  currentMark:number
+  currentMark:number;
+  individualMaxMark:number;
+  individualMarkMap
 
 
 }
