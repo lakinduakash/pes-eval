@@ -264,7 +264,7 @@ export class FormViewComponent implements OnInit {
 
       this.studentIds=arr;
       console.log(arr);
-      this.editEvent.event.emit(51)
+      this.editEvent.groupReceived.next(arr);
     })
 
 
@@ -286,7 +286,7 @@ export class FormViewComponent implements OnInit {
               }
             }
           } else {
-            if (s.attr != undefined) {
+            if (s.attrInd != undefined) {
               for (let k of s.attr) {
                 if (k.maxMark != undefined){}
                   //this.currentTotalMarksForIndividual += k.maxMark

@@ -45,18 +45,20 @@ export class SectionComponent implements OnInit {
     }
     else {
 
-      this.selectIndividuals();
+      this.editEvent.groupReceived.subscribe(next=>{this.selectIndividuals(next)})
     }
   }
 
-  selectIndividuals()
+  selectIndividuals(arr:any[])
   {
-      for(let id of this.stuIds)
+    this.attrInd=[];
+      for(let id of arr)
       {
         this.attrInd.push({studentId:id,attr:this.attributeList})
       }
 
       this.section.attrInd=this.attrInd
+
   }
 
 }
