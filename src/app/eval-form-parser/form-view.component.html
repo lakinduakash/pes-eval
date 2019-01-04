@@ -27,6 +27,8 @@
   </div>
       <button class="submit-button" mat-button (click)="saveForm()" [disabled]="buttonDisabled || documentExist"> Submit </button>
 
+      <p *ngIf="documentExist">Form was submitted on {{currentGroup}}</p>
+
 </mat-card>
 
   </div>

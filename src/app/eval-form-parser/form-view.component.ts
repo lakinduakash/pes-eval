@@ -98,9 +98,6 @@ export class FormViewComponent implements OnInit {
     );
 
     this.editEvent.event.subscribe(next=>this.realTimeMarking.saveFormTemp(this.formId,this.form));
-    this.realTimeMarking.checkExistSavedForm(this.uid,this.projectId,this.presentId,this.currentGroup).subscribe(
-      next=>this.documentExist=next
-    )
 
   }
 
@@ -131,7 +128,11 @@ export class FormViewComponent implements OnInit {
               console.log('no cache form')
             }
             this.printForm();
-          })
+          });
+
+          this.realTimeMarking.checkExistSavedForm(this.uid,this.projectId,this.presentId,this.currentGroup).subscribe(
+            next=>this.documentExist=next
+          )
         }
       )
 
@@ -237,7 +238,8 @@ export class FormViewComponent implements OnInit {
       if(dialogRef.componentInstance.yesClicked)
       {
         if(this.currentGroup !== '' || this.currentGroup !=undefined) {
-          this.realTimeMarking.saveFormFinal(this.uid, this.projectId, this.presentId, this.formId, this.currentGroup, this.form);
+          this.realTimeMarking.saveFormFinal(this.uid, this.projectId, this.presentId, this.formId, this.currentGroup, this.form)
+            .subscribe(next=>this.documentExist=true);
           this.realTimeMarking.deleteTempForm(this.formId)
         }
 
