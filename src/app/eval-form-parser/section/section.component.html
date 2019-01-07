@@ -16,8 +16,9 @@
     <ng-template #ind>
 
       <div *ngFor="let a of attrInd" style="margin-top: 8px">
-        <p style="font-size: x-large">student Id: <strong>{{a.studentId}}</strong></p>
-        <hr>
+        <mat-divider></mat-divider>
+        <p style="font-size: x-large; color: #666666">student Id: <strong>{{a.studentId}}</strong></p>
+        <mat-divider></mat-divider>
 
         <div *ngFor="let attr of a.attr">
           <app-attribute-parser [sectionAtrr]="attr">

@@ -31,7 +31,7 @@ import {SharedModule} from '../shared/shared.module';
     MatOptionModule,
     MatSelectModule,
     SharedModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   declarations: [FormViewComponent,SectionComponent,AttributeComponent,ConfirmationDialog],
   exports:[FormViewComponent],
