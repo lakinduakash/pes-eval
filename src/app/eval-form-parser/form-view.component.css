@@ -40,7 +40,7 @@
   left: 0;
   bottom: 0;
   text-align: center;
-  background-color: #4CD964;
+
   transition: 0.5s;
   line-height: 0.1;
 }
@@ -53,9 +53,30 @@
   left: 0;
   bottom: 0;
   text-align: center;
-  background-color: #4CD964;
   transition: 0.5s;
 }
+
+
+.banner-stopped{
+  background-color: #d91569;
+  height: 65px;
+  min-width: 100%;
+}
+
+.banner-paused{
+
+  background-color: #d9b053;
+  height: 65px;
+  min-width: 100%;
+}
+
+.banner-running{
+
+  height: 65px;
+  min-width: 100%;
+  background-color: #4CD964;
+}
+
 
 .top-banner
 {
@@ -67,7 +88,7 @@
   left: 0;
   top: 0;
   text-align: center;
-  background-color: #4CD964;
+
   transition: 0.5s;
   line-height: 0.1;
 }
@@ -81,7 +102,7 @@
   top: 0;
   display: none;
   text-align: center;
-  background-color: #4CD964;
+
   transition: 0.5s;
 }
 

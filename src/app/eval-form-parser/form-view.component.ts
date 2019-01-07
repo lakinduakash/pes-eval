@@ -86,6 +86,8 @@ export class FormViewComponent implements OnInit {
 
   currentTotalMarks=0;
 
+  bannerStyle={'background-color':'#d91569'};
+
 
   ngOnInit() {
 
@@ -120,6 +122,7 @@ export class FormViewComponent implements OnInit {
             this.getGroup(data.currentGroup);
 
           this.stateBehaviour(data.currentState,data.currentGroup);
+          this.bannerStyle=FormViewComponent.getStylesOnStates(data.currentState);
           this.setTimer(data.startTime,data.currentState);
 
           //if(newForm)
@@ -186,6 +189,7 @@ export class FormViewComponent implements OnInit {
 
   stateBehaviour(state,group)
   {
+
     this.currentGroup= 'group ' +group;
     switch (state) {
 
@@ -319,6 +323,17 @@ export class FormViewComponent implements OnInit {
     aMap.forEach ((v,k) => { obj[k] = v });
     return obj;
   });
+
+
+  static getStylesOnStates(state)
+  {
+    switch (state) {
+      case 0: return {'background-color':'#4CD964'};
+      case 1: return {'background-color':'#d9b053'};
+      case 2: return {'background-color':'#d91569'};
+      case 3: return {'background-color':'#d91569'}
+    }
+  }
 
 
 }
