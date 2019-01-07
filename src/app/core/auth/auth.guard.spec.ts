@@ -26,7 +26,7 @@ class MockAuthService {
 
 }
 
-fdescribe('AuthGuard', () => {
+describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -49,17 +49,17 @@ fdescribe('AuthGuard', () => {
     }
   );
 
-  fit('should create service', inject([AuthGuard], (guard: AuthGuard) => {
+  it('should create service', inject([AuthGuard], (guard: AuthGuard) => {
     expect(guard).toBeTruthy();
   }));
 
-  fit('return true login on user object', inject([AuthGuard], (guard: AuthGuard) => {
+  it('return true login on user object', inject([AuthGuard], (guard: AuthGuard) => {
     let i = TestBed.get(AuthService);
     i.createUser();
     guard.canActivate(null, null).subscribe(next => expect(next).toBeTruthy());
   }));
 
-  fit('return false on null user object', inject([AuthGuard], (guard: AuthGuard) => {
+  it('return false on null user object', inject([AuthGuard], (guard: AuthGuard) => {
     let i = TestBed.get(AuthService);
     i.nullUser();
     guard.canActivate(null, null).subscribe(next => expect(next).toBeFalsy());
