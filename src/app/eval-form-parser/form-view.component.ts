@@ -208,7 +208,7 @@ export class FormViewComponent implements OnInit {
         break
       }
       case STATES.suspended: {
-        this.stateStatus='Presentation canceled';
+        this.stateStatus='Presentation stopped';
         this.buttonDisabled=true;
         if(this.timeSub!=undefined)
           this.timeSub.unsubscribe();
