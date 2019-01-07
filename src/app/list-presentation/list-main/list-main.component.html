@@ -19,6 +19,12 @@
             <div fxLayoutAlign="center">
               <mat-spinner *ngIf="!finishLoaded"></mat-spinner>
             </div>
+
+            <div fxLayoutAlign="center" *ngIf="finishLoaded && presentList.length==0">
+              <p style="color: #777777;font-weight: bold; font-size: 18px">
+                No presentations currently available!
+              </p>
+            </div>
             <div class="pres-list">
 
               <p fxFlexAlign="center" *ngIf="isEmptyP">You have no presentations Currently</p>
