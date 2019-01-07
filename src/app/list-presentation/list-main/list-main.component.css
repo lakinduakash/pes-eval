@@ -30,3 +30,14 @@ mat-list-item
 mat-list-item{
   height: 300px;
 }
+
+.main-content{
+  margin-top: 20px;
+}
+
+.h{
+  text-align: center;
+  font-weight: lighter ;
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+}

@@ -63,12 +63,14 @@ export interface EvalPresentationData {
 export interface Presentation {
   name:string;
   description?:string
+  scheduledTo
+  created
 }
 
-export interface EvalPresentationRawData {
-  formId: string
-  uid: string
-  projectId: string
+export class EvalPresentationRawData {
+  formId: string;
+  uid: string;
+  projectId: string;
   presentId: string
 
 }

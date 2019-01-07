@@ -9,10 +9,17 @@
     <div class="main-content">
       <div class="row">
         <div class="col-md-12">
-          <div class="card">
-            <div class="pres-list">
 
-              <mat-spinner fxFlexAlign="center" *ngIf="!finishLoaded"></mat-spinner>
+          <div fxLayoutAlign="center">
+
+            <p class="h">Available presentations</p>
+          </div>
+          <div class="card">
+
+            <div fxLayoutAlign="center">
+              <mat-spinner *ngIf="!finishLoaded"></mat-spinner>
+            </div>
+            <div class="pres-list">
 
               <p fxFlexAlign="center" *ngIf="isEmptyP">You have no presentations Currently</p>
               <p fxFlexAlign="center" *ngIf="isError">Some error occurred!</p>
@@ -20,6 +27,7 @@
                 <mat-list-item *ngFor="let i of presentList" (click)="open(i.rawDetails)">
                       <p mat-line class="p-name">{{i.presentDetails.name}}</p>
                       <p mat-line class ='p-det'>{{i.presentDetails.description}}</p>
+                      <p mat-line class ='p-det'>scheduled on:{{i.presentDetails.scheduledTo?.seconds*1000| date }}</p>
                       <mat-divider mat-line></mat-divider>
                 </mat-list-item>
               </mat-nav-list>
