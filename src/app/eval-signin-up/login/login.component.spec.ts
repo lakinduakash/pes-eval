@@ -13,7 +13,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {fireBaseConfig} from '../../../environments/environment';
 import {AuthService} from '../../core/auth/auth.service';
 
-fdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
