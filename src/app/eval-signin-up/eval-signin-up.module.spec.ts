@@ -1,10 +1,10 @@
-import {EvalSigninUpModule} from './eval-signin-up.module';
+import {EvalSignInUpModule} from './eval-signin-up.module';
 
 describe('EvalSigninUpModule', () => {
-  let evalSigninUpModule: EvalSigninUpModule;
+  let evalSigninUpModule: EvalSignInUpModule;
 
   beforeEach(() => {
-    evalSigninUpModule = new EvalSigninUpModule();
+    evalSigninUpModule = new EvalSignInUpModule();
   });
 
   it('should create an instance', () => {

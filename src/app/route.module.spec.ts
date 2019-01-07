@@ -1,10 +1,11 @@
-import { RouteModule } from './route.module';
+import {AppRouteModule} from './route.module';
+
 
 describe('RouteModule', () => {
-  let routeModule: RouteModule;
+  let routeModule: AppRouteModule;
 
   beforeEach(() => {
-    routeModule = new RouteModule();
+    routeModule = new AppRouteModule();
   });
 
   it('should create an instance', () => {
