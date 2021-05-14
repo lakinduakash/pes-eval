@@ -35,7 +35,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.5.2",
     "font-awesome": "4.7.0",
-    "jquery": "3.4.0",
+    "jquery": "3.5.0",
     "jw-bootstrap-switch-ng2": "2.0.2",
     "ng2-charts": "1.6.0",
     "ngx-toastr": "^9.1.0",
